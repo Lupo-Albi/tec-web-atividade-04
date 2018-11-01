@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Nov-2018 às 00:12
+-- Generation Time: 02-Nov-2018 às 00:56
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.11
 
@@ -59,7 +59,8 @@ INSERT INTO `membros` (`idMembro`, `nome`, `sobrenome`, `email`, `telefone`, `da
 (1, 'Luanderson', 'Martins de Albuquerque', 'luanderson-albuquerque@hotmail.com', '88996354532', '1997-05-07', NULL),
 (2, 'Júlio', 'César Rodrigues de Oliveira', 'jc_96@hotmail.com', '88996662256', '1996-01-05', NULL),
 (3, 'Igor', 'Linhares', 'frigfeli@gmail.com', '8899936384', '1997-09-08', NULL),
-(4, 'Amanda', 'Lima Sousa', 'just.amaanda@gmail.com', '994602740', '1994-02-21', NULL);
+(4, 'Amanda', 'Lima Sousa', 'just.amaanda@gmail.com', '994602740', '1994-02-21', NULL),
+(5, 'Ricardo', 'de Souza Silva', 'ricardosouza@alu.ufc.br', '88997354640', '1996-12-07', NULL);
 
 -- --------------------------------------------------------
 
@@ -153,7 +154,7 @@ ALTER TABLE `contatos`
 -- AUTO_INCREMENT for table `membros`
 --
 ALTER TABLE `membros`
-  MODIFY `idMembro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idMembro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `mensagem`
