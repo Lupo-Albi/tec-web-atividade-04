@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Template inicial, usando Bootstrap.</title>
+    <title>Título a Ser Mudado</title>
 
     <!-- Principal CSS do Bootstrap -->
     <link href="<?=base_url('static/css/bootstrap.min.css')?>" rel="stylesheet">
