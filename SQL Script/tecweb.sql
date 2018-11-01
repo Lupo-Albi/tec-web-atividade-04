@@ -1,123 +1,174 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: 01-Nov-2018 às 16:47
+-- Versão do servidor: 10.1.36-MariaDB
+-- versão do PHP: 7.2.11
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema tecweb
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema tecweb
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `tecweb` DEFAULT CHARACTER SET utf8 ;
-USE `tecweb` ;
-
--- -----------------------------------------------------
--- Table `tecweb`.`contato`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecweb`.`contato` ;
-
-CREATE TABLE IF NOT EXISTS `tecweb`.`contato` (
-  `idContato` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Nome` VARCHAR(20) NOT NULL,
-  `Sobrenome` VARCHAR(50) NOT NULL,
-  `Email` VARCHAR(50) NOT NULL,
-  PRIMARY KEY (`idContato`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `tecweb`.`membro`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecweb`.`membro` ;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE IF NOT EXISTS `tecweb`.`membro` (
-  `idMembro` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Nome` VARCHAR(20) NOT NULL,
-  `Sobrenome` VARCHAR(50) NOT NULL,
-  `Email` VARCHAR(50) NOT NULL,
-  `Telefone` VARCHAR(15) NULL DEFAULT NULL,
-  `DataNascimento` DATE NULL DEFAULT NULL,
-  `Bio` VARCHAR(500) NULL DEFAULT NULL,
-  PRIMARY KEY (`idMembro`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 7
-DEFAULT CHARACTER SET = utf8;
+--
+-- Database: `tecweb`
+--
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `tecweb`.`mensagem`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecweb`.`mensagem` ;
+--
+-- Estrutura da tabela `contatos`
+--
 
-CREATE TABLE IF NOT EXISTS `tecweb`.`mensagem` (
-  `idMensagem` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Conteudo` VARCHAR(500) NOT NULL,
-  `Data` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `Contato_idContato` INT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`idMensagem`),
-  INDEX `fk_Mensagem_Contato1_idx` (`Contato_idContato` ASC) VISIBLE,
-  CONSTRAINT `fk_Mensagem_Contato1`
-    FOREIGN KEY (`Contato_idContato`)
-    REFERENCES `tecweb`.`contato` (`idContato`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE `contatos` (
+  `idContato` int(10) UNSIGNED NOT NULL,
+  `nome` varchar(20) NOT NULL,
+  `sobrenome` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `tecweb`.`membro_has_mensagem`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `tecweb`.`membro_has_mensagem` ;
+--
+-- Estrutura da tabela `membros`
+--
 
-CREATE TABLE IF NOT EXISTS `tecweb`.`membro_has_mensagem` (
-  `Membro_idMembro` INT(10) UNSIGNED NOT NULL,
-  `Mensagem_idMensagem` INT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`Membro_idMembro`, `Mensagem_idMensagem`),
-  INDEX `fk_Membro_has_Mensagem_Mensagem1_idx` (`Mensagem_idMensagem` ASC) VISIBLE,
-  INDEX `fk_Membro_has_Mensagem_Membro1_idx` (`Membro_idMembro` ASC) VISIBLE,
-  CONSTRAINT `fk_Membro_has_Mensagem_Membro1`
-    FOREIGN KEY (`Membro_idMembro`)
-    REFERENCES `tecweb`.`membro` (`idMembro`),
-  CONSTRAINT `fk_Membro_has_Mensagem_Mensagem1`
-    FOREIGN KEY (`Mensagem_idMensagem`)
-    REFERENCES `tecweb`.`mensagem` (`idMensagem`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+CREATE TABLE `membros` (
+  `idMembro` int(10) UNSIGNED NOT NULL,
+  `nome` varchar(20) NOT NULL,
+  `sobrenome` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `telefone` varchar(15) DEFAULT NULL,
+  `datanascimento` date DEFAULT NULL,
+  `bio` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- -----------------------------------------------------
--- Data for table `tecweb`.`Membro`
--- -----------------------------------------------------
-USE `tecweb`;
+-- --------------------------------------------------------
 
-INSERT INTO `tecweb`.`Membro` (Nome, Sobrenome, Email, Telefone, DataNascimento, Bio)
-VALUES ('Luanderson', 'Martins de Albuquerque', 'luanderson-albuquerque@hotmail.com', '88996354532', '1997-05-07',
-' '
-);
-INSERT INTO `tecweb`.`Membro` (Nome, Sobrenome, Email, Telefone, DataNascimento, Bio)
-VALUES ('Amanda', 'Lima Sousa', 'just.amaanda@gmail.com', '8894602740', '1994-01-01',
-' '
-);
-INSERT INTO `tecweb`.`Membro` (Nome, Sobrenome, Email, Telefone, DataNascimento, Bio)
-VALUES ('Igor', 'Felicio Linhares', 'frigfeli@gmail.com', '8899936384', '1994-01-01',
-' '
-);
-INSERT INTO `tecweb`.`Membro` (Nome, Sobrenome, Email, Telefone, DataNascimento, Bio)
-VALUES ('Julio', 'Cesar Rodrigues de Oliveira', 'jc_r96@hotmail.com', '8897664863', '1994-01-01',
-' '
-);
-INSERT INTO `tecweb`.`Membro` (Nome, Sobrenome, Email, Telefone, DataNascimento, Bio)
-VALUES ('Rayon', 'Lindraz Nunes', 'rayonnunes@hotmail.com', '8597488646', '1994-01-01',
-' '
-);
-INSERT INTO `tecweb`.`Membro` (Nome, Sobrenome, Email, Telefone, DataNascimento, Bio)
-VALUES ('Ricardo', 'de Souza Silva', 'ricardosouza@alu.ufc.br', '8897354640', '1994-01-01',
-' '
+--
+-- Estrutura da tabela `membro_has_mensagem`
+--
+
+CREATE TABLE `membro_has_mensagem` (
+  `fk_idMembro` int(10) UNSIGNED NOT NULL,
+  `fk_idMensagem` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `mensagem`
+--
+
+CREATE TABLE `mensagem` (
+  `idMensagem` int(10) UNSIGNED NOT NULL,
+  `conteudo` varchar(500) NOT NULL,
+  `data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fk_idContato` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vermensagem`
+-- (See below for the actual view)
+--
+CREATE TABLE `vermensagem` (
+`data` timestamp
+,`Remetente` varchar(20)
+,`Sobrenome` varchar(50)
+,`Email` varchar(50)
+,`Destinatário` varchar(20)
+,`Mensagem` varchar(500)
 );
 
+-- --------------------------------------------------------
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+--
+-- Structure for view `vermensagem`
+--
+DROP TABLE IF EXISTS `vermensagem`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vermensagem`  AS  select `mensagem`.`data` AS `data`,`contatos`.`nome` AS `Remetente`,`contatos`.`sobrenome` AS `Sobrenome`,`contatos`.`email` AS `Email`,`membros`.`nome` AS `Destinatário`,`mensagem`.`conteudo` AS `Mensagem` from (((`contatos` join `mensagem` on((`contatos`.`idContato` = `mensagem`.`fk_idContato`))) join `membro_has_mensagem` on((`mensagem`.`idMensagem` = `membro_has_mensagem`.`fk_idMensagem`))) join `membros` on((`membro_has_mensagem`.`fk_idMembro` = `membros`.`idMembro`))) ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `contatos`
+--
+ALTER TABLE `contatos`
+  ADD PRIMARY KEY (`idContato`);
+
+--
+-- Indexes for table `membros`
+--
+ALTER TABLE `membros`
+  ADD PRIMARY KEY (`idMembro`);
+
+--
+-- Indexes for table `membro_has_mensagem`
+--
+ALTER TABLE `membro_has_mensagem`
+  ADD KEY `fk_idMembro` (`fk_idMembro`),
+  ADD KEY `fk_idMensagem` (`fk_idMensagem`);
+
+--
+-- Indexes for table `mensagem`
+--
+ALTER TABLE `mensagem`
+  ADD PRIMARY KEY (`idMensagem`),
+  ADD KEY `fk_idContato` (`fk_idContato`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `contatos`
+--
+ALTER TABLE `contatos`
+  MODIFY `idContato` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `membros`
+--
+ALTER TABLE `membros`
+  MODIFY `idMembro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `mensagem`
+--
+ALTER TABLE `mensagem`
+  MODIFY `idMensagem` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `membro_has_mensagem`
+--
+ALTER TABLE `membro_has_mensagem`
+  ADD CONSTRAINT `fk_idMembro` FOREIGN KEY (`fk_idMembro`) REFERENCES `membros` (`idMembro`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_idMensagem` FOREIGN KEY (`fk_idMensagem`) REFERENCES `mensagem` (`idMensagem`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `mensagem`
+--
+ALTER TABLE `mensagem`
+  ADD CONSTRAINT `fk_idContato` FOREIGN KEY (`fk_idContato`) REFERENCES `contatos` (`idContato`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
