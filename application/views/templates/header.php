@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>Título</title>
+        <title>Título para Mudar</title>
 
         <!-- Bootstrap -->
         <link href="<?=base_url('static/css/bootstrap.min.css')?>" rel="stylesheet">
