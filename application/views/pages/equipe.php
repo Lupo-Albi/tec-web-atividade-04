@@ -7,13 +7,14 @@
         // Criar conexão
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Checar Conexão
-        if ($conn->connection_error)
+        if ($conn->connect_error)
         {
             die('A conexão falhou: ' . $conn->connect_error);
         }
     ?>
 
     <main role="main">
+	 <br><br><br>
         <?php
             $sql = 'SELECT idMembro, nome, sobrenome FROM Membros';
             $result = $conn->query($sql);
