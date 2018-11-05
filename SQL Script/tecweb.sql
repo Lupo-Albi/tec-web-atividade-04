@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Nov-2018 às 00:56
+-- Generation Time: 05-Nov-2018 às 04:19
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.11
 
@@ -48,7 +48,7 @@ CREATE TABLE `membros` (
   `email` varchar(50) NOT NULL,
   `telefone` varchar(15) DEFAULT NULL,
   `datanascimento` date DEFAULT NULL,
-  `bio` varchar(500) DEFAULT NULL
+  `bio` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -56,11 +56,11 @@ CREATE TABLE `membros` (
 --
 
 INSERT INTO `membros` (`idMembro`, `nome`, `sobrenome`, `email`, `telefone`, `datanascimento`, `bio`) VALUES
-(1, 'Luanderson', 'Martins de Albuquerque', 'luanderson-albuquerque@hotmail.com', '88996354532', '1997-05-07', NULL),
+(1, 'Luanderson', 'Martins de Albuquerque', 'luanderson-albuquerque@hotmail.com', '88996354532', '1997-05-07', 'é estudante de Engenharia de Computação na Universidade Federal do Ceará - Campus Sobral. Tem afinidade com programação e quer seguir pela vertente de Ciências da Computação no curso. Tem bastante interesse na área de desenvolvimento de jogos, por isso escolheu seguir essa carreira. Gosta de jogar video game no tempo livre.'),
 (2, 'Júlio', 'César Rodrigues de Oliveira', 'jc_96@hotmail.com', '88996662256', '1996-01-05', NULL),
 (3, 'Igor', 'Linhares', 'frigfeli@gmail.com', '8899936384', '1997-09-08', NULL),
 (4, 'Amanda', 'Lima Sousa', 'just.amaanda@gmail.com', '994602740', '1994-02-21', NULL),
-(5, 'Ricardo', 'de Souza Silva', 'ricardosouza@alu.ufc.br', '88997354640', '1996-12-07', NULL);
+(5, 'Ricardo', 'de Souza Silva', 'ricardosouza@alu.ufc.br', '88997354640', '1996-12-07', 'é estudante de Engenharia de Computação desde o primeiro semestre de 2015 na Universidade Federal do Ceará – Campus Sobral, dentre as vertentes do curso em questão, tem uma certa afinidade com Ciências da Computação, área escolhida para atuação, inclusive. Até o momento não apresenta qualquer experiência na área profissional, resumindo-se apenas à vida acadêmica.</p>\r\n<p>Dentre as linguagens da área, tem mais afinidade/habilidade com MATLAB, além de ter preferência pelo estudo relacionado à Inteligência Computacional, principalmente no ramo denominado Morfologia Matemática. Embora também tenha interesse pela área de Tecnologias Web.');
 
 -- --------------------------------------------------------
 
