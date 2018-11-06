@@ -8,48 +8,65 @@
 
             <div class="col-sm-8">
                 <h4 class="text-center">Entre em contato com a gente!</h4><br>
-                <form method="POST" name="mensagem" action="">
+
+                <!--
+                -- Formulário de Contato 
+                -->
+                <form method="POST" action="<?=base_url('contato/salvar')?>" name="mensagem" action="">
+                    <!-- 
+                    -- Aréa para informar o nome do remetente da mensagem no Formulário 
+                    -->
                     <div class="form-group row col-sm">
-                        <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+                        <label for="name" class="col-sm-2 col-form-label">Nome</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" placeholder="Escreva seu nome">
+                            <input type="text" name="nome" class="form-control" placeholder="Escreva seu nome" value="<?=set_value('nome')?>" required>
                         </div>
                     </div>
-
+                    <!--
+                    -- Área para informar o e-mail do remetente da mensagem no Formulário
+                    -->
                     <div class="form-group row col-sm">
                         <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Escreva seu e-mail">
+                            <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Escreva seu e-mail" required>
                             <small id="emailHelp" class="form-text text-muted">Nós nunca iremos compartilhar seu e-mail com ninguém.</small>
                         </div>
                     </div>
-
+                    <!--
+                    -- Select para escolher pra qual membro da equipe enviar a mensagem
+                    -->
                     <div class="form-group row col-sm">
                         <label for="inputMembro" class="col-sm-2 col-form-label">Destinatário</label>
                         <div class="col-sm-5">
-                            <select class="form-control">
-                                <option selected>Escolha para quem enviar...</option>
-                                <option>Todos os membros</option>
-                                <option>Amanda</option>
-                                <option>Igor</option>
-                                <option>Júlio</option>
-                                <option>Luanderson</option>
-                                <option>Ricardo</option>
-                                <option>Rayon</option>
+                            <select class="form-control" name="destinatario" id="destinatario" required>
+                                <option value="none" selected>Escolha para quem enviar...</option>
+                                <option value="all">Todos os membros</option>
+                                <option value="amanda">Amanda</option>
+                                <option value="igor">Igor</option>
+                                <option value="julio">Júlio</option>
+                                <option value="luanderson">Luanderson</option>
+                                <option value="ricardo">Ricardo</option>
+                                <option value="rayon">Rayon</option>
                             </select>
                         </div>
                     </div>
-
+                    <!--
+                    -- Textarea para escrever a mensagem
+                    -->
                     <div class="form-group row col-sm">
                         <label for="conteudo" class="col-sm-2 col-form-label">Mensagem de Texto</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="3" placeholder="Escreva sua mensagem..."></textarea>
+                            <textarea class="form-control" name="conteudo" rows="3" placeholder="Escreva sua mensagem..." required></textarea>
+                            <small class="form-text text-muted float-right">Todos os campos são obrigatórios.</small>
                         </div>
                     </div>
+                    <!--
+                    -- Botão de submit
+                    -->
                     <div class="col-sm">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" value="Salvar" class="btn btn-primary">Enviar</button>
                     </div>
-                </form>
+                </form> <!-- /Formulário de Contato -->
             </div>
 
             <div class="col-sm-2">

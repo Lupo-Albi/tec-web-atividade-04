@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('template', 'database'); // Biblioteca Most Simple Template
+$autoload['libraries'] = array('template', 'database', 'form_validation', 'session'); // Biblioteca Most Simple Template
 
 /*
 | -------------------------------------------------------------------
