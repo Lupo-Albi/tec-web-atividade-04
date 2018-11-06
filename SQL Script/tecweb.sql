@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Nov-2018 às 04:19
+-- Generation Time: 06-Nov-2018 às 01:55
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.11
 
@@ -31,7 +31,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `contatos` (
   `idContato` int(10) UNSIGNED NOT NULL,
   `nome` varchar(20) NOT NULL,
-  `sobrenome` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -93,12 +92,6 @@ CREATE TABLE `mensagem` (
 -- (See below for the actual view)
 --
 CREATE TABLE `vermensagem` (
-`data` timestamp
-,`Remetente` varchar(20)
-,`Sobrenome` varchar(50)
-,`Email` varchar(50)
-,`Destinatário` varchar(20)
-,`Mensagem` varchar(500)
 );
 
 -- --------------------------------------------------------
