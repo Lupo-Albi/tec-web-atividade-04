@@ -44,7 +44,7 @@
                                 <!-- Itera uma lista de opções no select pelos dados passados pelo banco de dados -->
                                 <?php for ($i = 1; $i < count($membros); $i++){ ?>
                                 <option value="<?=$i?>"><?= $membros[$i]['nome']?></option>
-                                <?php } ?>
+                                <?php }?>
                             </select>
                         </div>
                     </div>
