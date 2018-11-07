@@ -39,14 +39,12 @@
                         <label for="inputMembro" class="col-sm-2 col-form-label">Destinatário</label>
                         <div class="col-sm-5">
                             <select class="form-control" name="destinatario" id="destinatario" required>
-                                <option value="none" selected>Escolha para quem enviar...</option>
-                                <option value="all">Todos os membros</option>
-                                <option value="amanda">Amanda</option>
-                                <option value="igor">Igor</option>
-                                <option value="julio">Júlio</option>
-                                <option value="luanderson">Luanderson</option>
-                                <option value="ricardo">Ricardo</option>
-                                <option value="rayon">Rayon</option>
+                                <option value="-2" selected>Escolha para quem enviar...</option>
+                                <option value="-1">Todos os membros</option>
+                                <!-- Itera uma lista de opções no select pelos dados passados pelo banco de dados -->
+                                <?php for ($i = 0; $i < count($membros); $i++){ ?>
+                                <option value="<?=$i?>"><?= $membros[$i]['nome']?></option>
+                                <?php }?>
                             </select>
                         </div>
                     </div>
