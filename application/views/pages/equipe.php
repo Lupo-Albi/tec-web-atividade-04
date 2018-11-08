@@ -2,58 +2,22 @@
     <br><br><br>
     <!-- 3 colunas com imagens e texto -->
     <div class="row">
-        <div class="col-lg-4"> <!-- index: 0 nome: Amanda -->
-            <img class="rounded-circle" src="<?=base_url('static/img/amanda.jpg')?>" alt="" width="140" height="140">
-            <h2><?php echo $membros[0]['nome'] ?></h2>
-            <p>Bio</p>
-			<strong>Nome Completo:</strong> <?php echo $membros[0]['nome'] . ' ' . $membros[0]['sobrenome'] ?><br>
-			<strong>E-mail: </strong><?php echo $membros[0]['email'] ?><br>
-			<strong>Telefone: </strong><?php echo $membros[0]['telefone'] ?><br>
-        </div><!-- /.col-lg-4 -->
-
-        <div class="col-lg-4"> <!-- index: 1 nome: Igor -->
-            <img class="rounded-circle" src="<?=base_url('static/img/igor.jpg')?>" alt="" width="140" height="140">
-            <h2><?php echo $membros[1]['nome'] ?></h2>
-            <p>Bio</p>
-			<strong>Nome Completo:</strong> <?php echo $membros[1]['nome'] . ' ' . $membros[1]['sobrenome'] ?><br>
-			<strong>E-mail: </strong><?php echo $membros[1]['email'] ?><br>
-			<strong>Telefone: </strong><?php echo $membros[1]['telefone'] ?><br>
-        </div><!-- /.col-lg-4 -->
-
-        <div class="col-lg-4"> <!-- index: 2 nome: Júlio -->
-            <img class="rounded-circle" src="<?=base_url('static/img/julio.jpg')?>" alt="" width="140" height="140">
-            <h2><?php echo $membros[2]['nome'] ?></h2>
-            <p>Bio</p>
-			<strong>Nome Completo:</strong> <?php echo $membros[2]['nome'] . ' ' . $membros[2]['sobrenome'] ?><br>
-			<strong>E-mail: </strong><?php echo $membros[2]['email'] ?><br>
-			<strong>Telefone: </strong><?php echo $membros[2]['telefone'] ?><br>
-        </div><!-- /.col-lg-4 -->
-    </div>
-
-    <!-- 3 colunas com imagens e texto -->
-    <div class="row">
-        <div class="col-lg-4"> <!-- index: 3 nome: Luanderson -->
-            <img class="rounded-circle" src="<?=base_url('static/img/luanderson.jpg')?>" alt="" width="140" height="140">
-            <h2><?php echo $membros[3]['nome'] ?></h2>
-            <p><?php echo $membros[3]['bio'] ?></p>
-			<strong>Nome Completo:</strong> <?php echo $membros[3]['nome'] . ' ' . $membros[3]['sobrenome'] ?><br>
-			<strong>E-mail: </strong><?php echo $membros[3]['email'] ?><br>
-			<strong>Telefone: </strong><?php echo $membros[3]['telefone'] ?><br>
-        </div><!-- /.col-lg-4 -->
-
-        <div class="col-lg-4"> <!-- index: 4 nome: Ricardo -->
-            <img class="rounded-circle" src="<?=base_url('static/img/ricardo.jpg')?>" alt="" width="140" height="140">
-            <h2><?php echo $membros[4]['nome'] ?></h2> 
-            <p><?php echo $membros[4]['bio'] ?></p>
-			<strong>Nome Completo:</strong> <?php echo $membros[4]['nome'] . ' ' . $membros[4]['sobrenome'] ?><br>
-			<strong>E-mail: </strong><?php echo $membros[4]['email'] ?><br>
-			<strong>Telefone: </strong><?php echo $membros[4]['telefone'] ?><br>
-        </div><!-- /.col-lg-4 -->
-
-        <div class="col-lg-4"> <!-- index: 5 nome: Rayon -->
-            <img class="rounded-circle" src="<?=base_url('static/img/rayon.jpg')?>" alt="" width="140" height="140">
-            <h2>Heading</h2>
-            <p>Parágrafo</p>
-        </div><!-- /.col-lg-4 -->
+    <!--
+        Criando uma iteração em php para exibir as informações dos membros a partir do banco de dados
+        A função Img criada em membros_model é usada nessa iteração para buscar as strings que correspondem as imagens de cada membro na pasta static/img
+        Os nomes das imagens foram nomeados de acordo com o ID de cada membro na sua respectiva tabela do banco de dados
+        e.g.: se um membro tem seu id = 0 no banco, o nome da sua imagem correspondente terá o nome 0.jpg
+    -->
+    <?php foreach ($membros as $membro => $value) { ?>
+        <div class="col-lg-4">
+            <?php $index = $value['id']; ?>
+            <img class="rounded-circle" src="<?=$this->membros_model->Img($index)?>" alt="" width="140" height="140">
+            <h2><?php echo $value['nome']; ?></h2>
+            <p><?php echo $value['bio']; ?></p>
+            <strong>Nome Completo:</strong> <?php echo $value['nome'] . ' ' . $value['sobrenome']; ?><br>
+            <strong>E-mail: </strong><?php echo $value['email']; ?><br>
+            <strong>Telefone: </strong><?php echo $value['telefone']; ?><br>
+        </div>
+    <?php } ?>
     </div>
 </div>

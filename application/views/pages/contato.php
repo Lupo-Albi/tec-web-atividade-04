@@ -30,7 +30,7 @@
                     <div class="form-group row col-sm">
                         <label for="name" class="col-sm-2 col-form-label">Nome</label>
                         <div class="col-sm-10">
-                            <input type="text" name="nome" class="form-control" placeholder="Escreva seu nome" value="<?=set_value('nome')?>" required>
+                            <input type="text" name="nome" class="form-control" placeholder="Escreva seu nome" required>
                         </div>
                     </div>
                     <!--
