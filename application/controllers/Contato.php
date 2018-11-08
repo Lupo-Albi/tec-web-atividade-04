@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-date_default_timezone_set("America/Fortaleza");
 
     class Contato extends CI_Controller 
     {
@@ -32,12 +31,10 @@ date_default_timezone_set("America/Fortaleza");
             $this->load->model('membro_has_mensagem_model');
             // Recupera os membros através do model
             $membros = $this->membros_model->GetAll();
-            // Passa os membros para o array que será enviado à Contato
-            $dados['membros'] = $membros;
 
             // Tratando a tabela Contatos do Banco de Dados
             // Recupera os contatos através do model
-            $contatos = $this->contatos_model->GetAll('id');
+            $contatos = $this->contatos_model->GetAll();
 
             // Caso o email não exista no BD, um novo registro é adicionado
             // Caso já exista, o contato é atualizado
@@ -45,7 +42,11 @@ date_default_timezone_set("America/Fortaleza");
             {
                 // Novo email, novo contato
                 // Recupera os dados do formulário para contato
-                $contato = $this->input->post(array('nome', 'email'));
+                $contato = array(
+                    'id' => NULL,
+                    'nome' => $this->input->post('nome'),
+                    'email' => $this->input->post('email'),
+                );
                 // Insere os dados no banco recuperando o status da operação
                 $status = $this->contatos_model->Inserir($contato);
 
@@ -81,7 +82,7 @@ date_default_timezone_set("America/Fortaleza");
 
             // Tratando a tabela Mensagem do Banco de Dados
             // Recupera o ID do remetente da mensagem no Banco de dados através do email do formulário
-            // Esse ID é a chave estrangeira da tabela Mensagem
+            // Esse ID será a chave estrangeira da tabela Mensagem
             $email = $this->input->post('email');
             $contato = $this->contatos_model->GetByEmail($email);
             $id = $contato['id'];
@@ -101,7 +102,7 @@ date_default_timezone_set("America/Fortaleza");
                 $this->session->set_flashdata('error', 'Não foi possível inserir a mensagem.');
             } else
             {
-                $this->session->set_flashdata('error', 'Mensagem inserida com sucesso.');
+                $this->session->set_flashdata('success', 'Mensagem inserida com sucesso.');
             }
 
             /* Tratando da tabela Membro_has_mensagem do Banco de Dados
@@ -144,7 +145,7 @@ date_default_timezone_set("America/Fortaleza");
                 $this->session->set_flashdata('error', 'Não foi possível inserir a mensagem.');
             } else
             {
-                $this->session->set_flashdata('error', 'Mensagem enviada com sucesso.');
+                $this->session->set_flashdata('success', 'Mensagem enviada com sucesso.');
             }
             
             // Redireciona de volta para o formulário de contato

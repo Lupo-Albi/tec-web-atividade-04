@@ -1,20 +1,25 @@
 <main role="main">
     <br><br><br>
     
-    <?php if ($this->session->flashdata('error') == TRUE): ?>
-		<p><?php echo $this->session->flashdata('error'); ?></p>
-	<?php endif; ?>
-	<?php if ($this->session->flashdata('success') == TRUE): ?>
-		<p><?php echo $this->session->flashdata('success'); ?></p>
-    <?php endif; ?>
+    
 
     <div class="container">
         <div class="row">
             <div class="col-sm-2">
                 <!-- Coluna 1 de 3 -->
             </div>
-
             <div class="col-sm-8">
+            <?php if ($this->session->flashdata('error') == TRUE): ?>
+                <div class='col-sm alert alert-danger' role='alert'>
+                    <p class='text-center'><?php echo $this->session->flashdata('error'); ?></p>
+                </div>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('success') == TRUE): ?>
+                <div class='col-sm alert alert-success' role='alert'>
+                    <p class='text-center'><?php echo $this->session->flashdata('success'); ?></p>
+                </div>
+            <?php endif; ?>
+
                 <h4 class="text-center">Entre em contato com a gente!</h4><br>
 
                 <!--
