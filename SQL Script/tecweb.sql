@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Nov-2018 às 05:39
+-- Generation Time: 08-Nov-2018 às 06:07
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.11
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `contatos` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nome` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `nome` varchar(50) NOT NULL,
+  `email` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -80,28 +80,10 @@ CREATE TABLE `membro_has_mensagem` (
 
 CREATE TABLE `mensagem` (
   `id` int(10) UNSIGNED NOT NULL,
-  `conteudo` varchar(500) NOT NULL,
-  `data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `conteudo` varchar(1000) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fk_idContato` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vermensagem`
--- (See below for the actual view)
---
-CREATE TABLE `vermensagem` (
-);
-
--- --------------------------------------------------------
-
---
--- Structure for view `vermensagem`
---
-DROP TABLE IF EXISTS `vermensagem`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vermensagem`  AS  select `mensagem`.`data` AS `data`,`contatos`.`nome` AS `Remetente`,`contatos`.`sobrenome` AS `Sobrenome`,`contatos`.`email` AS `Email`,`membros`.`nome` AS `Destinatário`,`mensagem`.`conteudo` AS `Mensagem` from (((`contatos` join `mensagem` on((`contatos`.`idContato` = `mensagem`.`fk_idContato`))) join `membro_has_mensagem` on((`mensagem`.`idMensagem` = `membro_has_mensagem`.`fk_idMensagem`))) join `membros` on((`membro_has_mensagem`.`fk_idMembro` = `membros`.`idMembro`))) ;
 
 --
 -- Indexes for dumped tables
@@ -123,8 +105,8 @@ ALTER TABLE `membros`
 -- Indexes for table `membro_has_mensagem`
 --
 ALTER TABLE `membro_has_mensagem`
-  ADD KEY `fk_idMembro` (`fk_idMembro`),
-  ADD KEY `fk_idMensagem` (`fk_idMensagem`);
+  ADD KEY `fk_idMensagem` (`fk_idMensagem`),
+  ADD KEY `fk_idMembro` (`fk_idMembro`);
 
 --
 -- Indexes for table `mensagem`
@@ -141,7 +123,7 @@ ALTER TABLE `mensagem`
 -- AUTO_INCREMENT for table `contatos`
 --
 ALTER TABLE `contatos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `membros`
@@ -153,7 +135,7 @@ ALTER TABLE `membros`
 -- AUTO_INCREMENT for table `mensagem`
 --
 ALTER TABLE `mensagem`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -163,8 +145,8 @@ ALTER TABLE `mensagem`
 -- Limitadores para a tabela `membro_has_mensagem`
 --
 ALTER TABLE `membro_has_mensagem`
-  ADD CONSTRAINT `fk_idMembro` FOREIGN KEY (`fk_idMembro`) REFERENCES `membros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_idMensagem` FOREIGN KEY (`fk_idMensagem`) REFERENCES `mensagem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_idMensagem` FOREIGN KEY (`fk_idMensagem`) REFERENCES `mensagem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `membro_has_mensagem_ibfk_1` FOREIGN KEY (`fk_idMembro`) REFERENCES `membros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `mensagem`
