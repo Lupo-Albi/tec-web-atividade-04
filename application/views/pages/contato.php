@@ -43,6 +43,7 @@
                                 <option value="-1">Todos os membros</option>
                                 <!-- Itera uma lista de opções no select pelos dados passados pelo banco de dados -->
                                 <?php for ($i = 0; $i < count($membros); $i++){ ?>
+                                <option value="<?=$i?>"><?= $membros[$i]['nome']?></option>
                                 <?php }?>
                             </select>
                         </div>
