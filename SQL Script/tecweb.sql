@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 08-Nov-2018 às 11:42
+-- Generation Time: 08-Nov-2018 às 12:54
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.11
 
@@ -85,6 +85,29 @@ CREATE TABLE `mensagem` (
   `fk_idContato` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `vermensagens`
+-- (See below for the actual view)
+--
+CREATE TABLE `vermensagens` (
+`Recebido em` timestamp
+,`Remetente` varchar(50)
+,`E-mail` varchar(50)
+,`Destinatário` varchar(20)
+,`Mensagem` varchar(1000)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `vermensagens`
+--
+DROP TABLE IF EXISTS `vermensagens`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vermensagens`  AS  select `mensagem`.`data` AS `Recebido em`,`contatos`.`nome` AS `Remetente`,`contatos`.`email` AS `E-mail`,`membros`.`nome` AS `Destinatário`,`mensagem`.`conteudo` AS `Mensagem` from (((`contatos` join `mensagem` on((`contatos`.`id` = `mensagem`.`fk_idContato`))) join `membro_has_mensagem` on((`mensagem`.`id` = `membro_has_mensagem`.`fk_idMensagem`))) join `membros` on((`membro_has_mensagem`.`fk_idMembro` = `membros`.`id`))) ;
+
 --
 -- Indexes for dumped tables
 --
@@ -123,7 +146,7 @@ ALTER TABLE `mensagem`
 -- AUTO_INCREMENT for table `contatos`
 --
 ALTER TABLE `contatos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `membros`
@@ -135,7 +158,7 @@ ALTER TABLE `membros`
 -- AUTO_INCREMENT for table `mensagem`
 --
 ALTER TABLE `mensagem`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

@@ -1,7 +1,5 @@
 <main role="main">
-    <br><br><br>
-    
-    
+    <br><br><br>  
 
     <div class="container">
         <div class="row">
@@ -16,7 +14,7 @@
             <?php endif; ?>
             <?php if ($this->session->flashdata('success') == TRUE): ?>
                 <div class='col-sm alert alert-success' role='alert'>
-                    <p class='text-center'><?php echo $this->session->flashdata('success'); ?></p>
+                    <p class='text-center m-0'><?php echo $this->session->flashdata('success'); ?></p>
                 </div>
             <?php endif; ?>
 

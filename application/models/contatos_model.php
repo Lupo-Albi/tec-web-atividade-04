@@ -13,13 +13,15 @@ Class Contatos_model extends Modelo
 	 * 
 	 * @param array $contatos lista dos contatos na tabela do BD para serem checados
 	 * 
+     * @param string $email email a ser procurado nos contatos
+     * 
 	 * @return boolean
 	 */
-	function EmailExists($contatos)
+	function EmailExists($contatos, $email)
 	{
 		foreach($contatos as $contato => $data)
         {
-            if(in_array($this->input->post('email'), $data))
+            if(in_array($email, $data))
             {
                 $exists = TRUE;
                 break;

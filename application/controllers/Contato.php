@@ -23,6 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          */
         public function Salvar()
         {
+            // Definindo a timestamp para registrar quando a mensagem foi enviada
+            date_default_timezone_set('America/Fortaleza'); // custom timezone
+            $date = new DateTime;
+
             // Carrega os modelos
             $this->load->model('modelo');
             $this->load->model('membros_model');
@@ -36,17 +40,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             // Recupera os contatos através do model
             $contatos = $this->contatos_model->GetAll();
 
+            // Salvando o email do formulário em uma variável
+            $email = $this->input->post('email');
+
+            // Verificando se o email já existe no BD
+            $emailExists = $this->contatos_model->EmailExists($contatos, $email);
+
             // Caso o email não exista no BD, um novo registro é adicionado
             // Caso já exista, o contato é atualizado
-            if(!$this->contatos_model->EmailExists($contatos))
+            if(!$emailExists)
             {
                 // Novo email, novo contato
                 // Recupera os dados do formulário para contato
                 $contato = array(
                     'id' => NULL,
                     'nome' => $this->input->post('nome'),
-                    'email' => $this->input->post('email'),
+                    'email' => $email,
                 );
+
                 // Insere os dados no banco recuperando o status da operação
                 $status = $this->contatos_model->Inserir($contato);
 
@@ -61,12 +72,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             } else
             {
                 // Email já existe, atualiza contato
-                // Salvando o email do formulário em uma variável
-                $email = $this->input->post('email');
                 // Recuperando o registro que possui o mesmo email no BD
                 $contato = $this->contatos_model->GetByEmail($email);
                 // Recupera o nome dado no formulário para atualizar ao email correspondente
-                $update = $this->input->post(array('nome','email'));
+                $update = array(
+                    'id' => $contato['id'],
+                    'nome' => $this->input->post('nome'),
+                    'email' => $email,
+                );
                 // Atualiza os dados no banco recuperando o status da operação
                 $status = $this->contatos_model->Atualizar($contato['id'], $update);
 
@@ -76,21 +89,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     $this->session->set_flashdata('error', 'Não foi possível atualizar o contato.');
                 } else
                 {
-                    $this->session->set_flashdata('error', 'Contato atualizado com sucesso.');
+                    $this->session->set_flashdata('success', 'Contato atualizado com sucesso.');
                 }
             }
 
             // Tratando a tabela Mensagem do Banco de Dados
             // Recupera o ID do remetente da mensagem no Banco de dados através do email do formulário
             // Esse ID será a chave estrangeira da tabela Mensagem
-            $email = $this->input->post('email');
             $contato = $this->contatos_model->GetByEmail($email);
             $id = $contato['id'];
             // Recupera o conteúdo da mensagem do formulário
             $mensagem = array(
                 'id' => NULL,
                 'conteudo' => $this->input->post('conteudo'),
-                'data' => time(),
+                'data' => $date->format('Y-m-d H:i:s'),
                 'fk_idContato' => $id,
             );
             // Insere os dados no banco recuperando o status da operação
