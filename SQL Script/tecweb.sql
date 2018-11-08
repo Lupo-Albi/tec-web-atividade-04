@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Nov-2018 às 01:55
+-- Generation Time: 08-Nov-2018 às 05:39
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.11
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `contatos` (
-  `idContato` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
   `nome` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -41,7 +41,7 @@ CREATE TABLE `contatos` (
 --
 
 CREATE TABLE `membros` (
-  `idMembro` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
   `nome` varchar(20) NOT NULL,
   `sobrenome` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE `membros` (
 -- Extraindo dados da tabela `membros`
 --
 
-INSERT INTO `membros` (`idMembro`, `nome`, `sobrenome`, `email`, `telefone`, `datanascimento`, `bio`) VALUES
+INSERT INTO `membros` (`id`, `nome`, `sobrenome`, `email`, `telefone`, `datanascimento`, `bio`) VALUES
 (1, 'Luanderson', 'Martins de Albuquerque', 'luanderson-albuquerque@hotmail.com', '88996354532', '1997-05-07', 'é estudante de Engenharia de Computação na Universidade Federal do Ceará - Campus Sobral. Tem afinidade com programação e quer seguir pela vertente de Ciências da Computação no curso. Tem bastante interesse na área de desenvolvimento de jogos, por isso escolheu seguir essa carreira. Gosta de jogar video game no tempo livre.'),
 (2, 'Júlio', 'César Rodrigues de Oliveira', 'jc_96@hotmail.com', '88996662256', '1996-01-05', NULL),
 (3, 'Igor', 'Linhares', 'frigfeli@gmail.com', '8899936384', '1997-09-08', NULL),
@@ -79,7 +79,7 @@ CREATE TABLE `membro_has_mensagem` (
 --
 
 CREATE TABLE `mensagem` (
-  `idMensagem` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
   `conteudo` varchar(500) NOT NULL,
   `data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `fk_idContato` int(10) UNSIGNED NOT NULL
@@ -111,13 +111,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- Indexes for table `contatos`
 --
 ALTER TABLE `contatos`
-  ADD PRIMARY KEY (`idContato`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `membros`
 --
 ALTER TABLE `membros`
-  ADD PRIMARY KEY (`idMembro`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `membro_has_mensagem`
@@ -130,7 +130,7 @@ ALTER TABLE `membro_has_mensagem`
 -- Indexes for table `mensagem`
 --
 ALTER TABLE `mensagem`
-  ADD PRIMARY KEY (`idMensagem`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_idContato` (`fk_idContato`);
 
 --
@@ -141,19 +141,19 @@ ALTER TABLE `mensagem`
 -- AUTO_INCREMENT for table `contatos`
 --
 ALTER TABLE `contatos`
-  MODIFY `idContato` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `membros`
 --
 ALTER TABLE `membros`
-  MODIFY `idMembro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `mensagem`
 --
 ALTER TABLE `mensagem`
-  MODIFY `idMensagem` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -163,14 +163,14 @@ ALTER TABLE `mensagem`
 -- Limitadores para a tabela `membro_has_mensagem`
 --
 ALTER TABLE `membro_has_mensagem`
-  ADD CONSTRAINT `fk_idMembro` FOREIGN KEY (`fk_idMembro`) REFERENCES `membros` (`idMembro`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_idMensagem` FOREIGN KEY (`fk_idMensagem`) REFERENCES `mensagem` (`idMensagem`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_idMembro` FOREIGN KEY (`fk_idMembro`) REFERENCES `membros` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_idMensagem` FOREIGN KEY (`fk_idMensagem`) REFERENCES `mensagem` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `mensagem`
 --
 ALTER TABLE `mensagem`
-  ADD CONSTRAINT `fk_idContato` FOREIGN KEY (`fk_idContato`) REFERENCES `contatos` (`idContato`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_idContato` FOREIGN KEY (`fk_idContato`) REFERENCES `contatos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
