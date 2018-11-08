@@ -8,26 +8,27 @@ Class Contatos_model extends Modelo
         $this->table = 'contatos';
     }
 
-    	/*
-	* Formata os contatos para exibição dos dados
-	*
-	* @param array $contatos Lista dos contatos a serem formatados
-	*
-	* @return array
-	*/
-	function Formatar($contatos)
+	/**
+	 * Checa se o email do formulário já está no Banco de Dados 
+	 * 
+	 * @param array $contatos lista dos contatos na tabela do BD para serem checados
+	 * 
+	 * @return boolean
+	 */
+	function EmailExists($contatos)
 	{
-		if($contatos)
-		{
-			for($i = 0; $i < count($contatos); $i++)
-			{
-				$contatos[$i]['editar_url'] = base_url('editar')."/".$contatos[$i]['idContato'];
-				$contatos[$i]['excluir_url'] = base_url('excluir')."/".$contatos[$i]['idContato'];
-			}
-			return $contatos;
-		} else
-		{
-			return false;
+		foreach($contatos as $contato => $data)
+        {
+            if(in_array($this->input->post('email'), $data))
+            {
+                $exists = TRUE;
+                break;
+            } else 
+            {
+                $exists = FALSE;
+            }
 		}
+		
+		return $exists;
 	}
 }

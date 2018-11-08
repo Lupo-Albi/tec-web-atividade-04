@@ -57,31 +57,3 @@
         </div><!-- /.col-lg-4 -->
     </div>
 </div>
-
-<div>
-<br><br><br>	
-	<table>
-		<caption>Contatos</caption>
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Sobrenome</th>
-				<th>Email</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-			<?php if($membros == FALSE): ?>
-				<tr><td colspan="2">Nenhum membro encontrado</td></tr>
-			<?php else: ?>
-				<?php foreach ($membros as $row): ?>
-					<tr>
-						<td><?= $row['nome'] ?></td>
-						<td><?= $row['sobrenome'] ?></td>
-						<td><?=  $row['email'] ?></td>
-					</tr>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</tbody>
-	</table>
-</div>

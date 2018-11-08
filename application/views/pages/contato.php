@@ -1,5 +1,13 @@
 <main role="main">
     <br><br><br>
+    
+    <?php if ($this->session->flashdata('error') == TRUE): ?>
+		<p><?php echo $this->session->flashdata('error'); ?></p>
+	<?php endif; ?>
+	<?php if ($this->session->flashdata('success') == TRUE): ?>
+		<p><?php echo $this->session->flashdata('success'); ?></p>
+    <?php endif; ?>
+
     <div class="container">
         <div class="row">
             <div class="col-sm-2">
@@ -39,12 +47,13 @@
                         <label for="destinatario" class="col-sm-2 col-form-label">Destinatário</label>
                         <div class="col-sm-5">
                             <select class="form-control" name="destinatario" id="destinatario" required>
-                                <option value="-2" selected>Escolha para quem enviar...</option>
-                                <option value="-1">Todos os membros</option>
+                                <option value="-1" disabled selected>Escolha para quem enviar...</option>
+                                <option value="0">Todos os membros</option>
                                 <!-- Itera uma lista de opções no select pelos dados passados pelo banco de dados -->
-                                <?php for ($i = 0; $i < count($membros); $i++){ ?>
-                                <option value="<?=$i?>"><?= $membros[$i]['nome']?></option>
-                                <?php }?>
+                                <?php foreach ($membros as $membro => $value){ ?>
+                                    <option value="<?=$value['id']?>"><?=$value['nome']?></option>
+                                <?php }
+                                ?>
                             </select>
                         </div>
                     </div>

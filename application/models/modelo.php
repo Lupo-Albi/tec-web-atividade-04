@@ -30,16 +30,22 @@ class Modelo extends CI_Model
 		
 		return $this->db->insert($this->table, $data);
 	}
-	
+
 	/**
-	* Recupera um registro a partir de um ID
+	* Recupera um registro a partir de um Email
 	*
-	* @param integer $id: ID do registro a ser recuperado
+	* @param integer $email: E-mail do registro a ser recuperado
 	*
 	* @return array
 	*/
-	function GetById($id)
+	function GetByEmail($email)
 	{
+		if(!isset($email))
+		{
+			return false;
+		}
+
+		$this->db->where('email', $email);
 		$query = $this->db->get($this->table);
 		
 		if ($query->num_rows() > 0)
@@ -53,7 +59,7 @@ class Modelo extends CI_Model
 	
 	/**
 	* Lista todos os registros da tabela
-	* @param string $sort: Campo para ordenação dos registros
+	* @param string $sort: Campo de parâmetro (se é pelo id ou nome) para ordenação dos registros
 	*
 	* @param string $order: tipo de ordenação (asc ou desc)
 	*
@@ -71,5 +77,25 @@ class Modelo extends CI_Model
 		{
 			return null;
 		}
+	}
+
+	/**
+	 * Atualiza um registro na tabela
+	 * 
+	 * @param integer $id ID do registro a ser atualizado
+	 * 
+	 * @param array $data Dados a serem inseridos
+	 * 
+	 * @return boolean
+	 */
+	function Atualizar ($id, $data)
+	{
+		if(is_null($id) || !isset($data))
+		{
+			return false;
+		}
+
+		$this->db->where('id', $id);
+		return $this->db->update($this->table, $data);
 	}
 }
